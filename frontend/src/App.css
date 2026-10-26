@@ -1,0 +1,604 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+:root {
+  font-family: 'DM Sans', sans-serif;
+  color: #201713;
+  background: #f7f3eb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.public-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.public-layout-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.public-layout-content > .content-page {
+  flex: 1;
+}
+
+
+a { color: inherit; text-decoration: none; }
+
+.site-shell { overflow: hidden; }
+
+
+.site-header {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 7%;
+  color: #fffaf1;
+  background: #170d0b;
+  border-bottom: 1px solid #39251c;
+}
+
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.brand-mark {
+  color: #d4aa5d;
+  font-size: 34px;
+  line-height: 1;
+}
+
+.brand-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 19px;
+}
+
+.brand-name small {
+  display: block;
+  margin-top: 4px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px;
+  letter-spacing: .5px;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.8vw, 27px);
+}
+
+.main-nav a {
+  font-size: 10px;
+  white-space: nowrap;
+  color: #eee4d8;
+}
+
+.main-nav a:hover,
+.main-nav a.active,
+.main-nav a[aria-current="page"] {
+  color: #e4bd73;
+}
+
+.header-cta,
+.button-primary,
+.button-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  min-height: 39px;
+  padding: 0 18px;
+  border-radius: 30px;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.header-cta {
+  border: 1px solid #d7b16d;
+  color: #fff8eb;
+}
+
+.header-cta:hover,
+.button-outline:hover { background: #ffffff16; }
+
+.hero {
+  position: relative;
+  min-height: 610px;
+  display: flex;
+  align-items: center;
+  padding: 115px 10% 95px;
+  color: #fffaf3;
+  background:
+    linear-gradient(90deg, #0d0907 0%, #120b08ed 30%, #170b076b 58%, #13090628 100%),
+    linear-gradient(0deg, #160a07a6, transparent 35%),
+    url('/images/hero-dancer.jpg') center 38% / cover no-repeat,
+    #21110b;
+}
+
+.hero-content { max-width: 560px; }
+
+.eyebrow,
+.section-eyebrow {
+  color: #b78a49;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.2px;
+  line-height: 1.8;
+}
+
+.eyebrow { color: #e0bd7b; }
+.eyebrow span { margin: 0 7px; }
+
+.hero h1 {
+  margin: 17px 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(44px, 5.2vw, 70px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -1.4px;
+}
+
+.hero h1 em {
+  color: #e2bc78;
+  font-weight: 400;
+}
+
+.hero-description {
+  max-width: 360px;
+  color: #e8ddd1;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 25px;
+}
+
+.button-primary {
+  border: 1px solid #9d4a3d;
+  background: #81252b;
+  color: #fff9ee;
+}
+
+.button-primary:hover { background: #9a3237; }
+
+.button-outline {
+  border: 1px solid #e7d7c5;
+  color: #fff9ee;
+}
+
+.hero-scroll {
+  position: absolute;
+  right: 7%;
+  bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #eee1d1;
+  font-size: 10px;
+}
+
+.hero-scroll span {
+  color: #e1bb73;
+  font-size: 23px;
+}
+
+.about-strip {
+  display: grid;
+  grid-template-columns: 2fr repeat(4, 1fr);
+  align-items: center;
+  gap: 24px;
+  padding: 48px 9%;
+  background: #f7f3eb;
+}
+
+.about-copy { max-width: 360px; }
+
+.about-copy h2,
+.section-heading h2,
+.simple-section h2,
+.contact-banner h2 {
+  margin: 9px 0 14px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(24px, 2.5vw, 34px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.about-copy > p:not(.section-eyebrow),
+.simple-section > p:not(.section-eyebrow),
+.contact-banner > p:not(.section-eyebrow) {
+  color: #6f6259;
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+.about-copy .button-primary { margin-top: 8px; }
+
+.stat {
+  min-height: 135px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-left: 1px solid #e9ddcb;
+  text-align: center;
+}
+
+.stat-icon {
+  color: #a36a35;
+  font-size: 24px;
+}
+
+.stat strong {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 31px;
+  font-weight: 500;
+}
+
+.stat > span:last-child {
+  color: #6f6259;
+  font-size: 10px;
+}
+
+.dance-section {
+  padding: 55px 9% 75px;
+  background: #fcfaf5;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 28px;
+}
+
+.section-heading h2 { margin-bottom: 0; }
+
+.view-all {
+  color: #76242a;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.dance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+
+.dance-card-art {
+  position: relative;
+  min-height: 175px;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: #3a2115;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.dance-card-art::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(
+    180deg,
+    #15090625 0%,
+    transparent 40%,
+    #15090685 100%
+  );
+  pointer-events: none;
+}
+
+.dance-art-0 {
+  background-image: url("/images/bharatanatyam.jpg");
+}
+
+.dance-art-1 {
+  background-image: url("/images/kathak.jpg");
+}
+
+.dance-art-2 {
+  background-image: url("/images/kathakali.jpg");
+}
+
+.dance-art-3 {
+  background-image: url("/images/kuchipudi.jpg");
+}
+
+.dance-art-4 {
+  background-image: url("/images/mohiniyattam.jpg");
+}
+
+.dance-art-5 {
+  background-image: url("/images/odissi.jpg");
+}
+
+.dance-card-art > span {
+  position: absolute;
+  z-index: 1;
+}
+
+.dance-card-art > span:first-child {
+  top: 8px;
+  left: 8px;
+  color: #fff6e8;
+  font-size: 9px;
+}
+
+.card-flower {
+  right: 9px;
+  bottom: 7px;
+  color: #e8c17c;
+  font-size: 21px;
+}
+
+
+.dance-card-art > span:first-child {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  color: #fff6e8;
+  font-size: 9px;
+}
+
+.dance-card-copy { align-self: center; }
+
+.dance-card-copy h3 {
+  margin: 0 0 7px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.dance-card-copy p {
+  margin: 0;
+  color: #756960;
+  font-size: 9px;
+  line-height: 1.7;
+}
+
+.dance-card-copy a {
+  display: inline-flex;
+  gap: 8px;
+  margin-top: 12px;
+  color: #79252b;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.simple-section {
+  padding: 65px 9%;
+  background: #f7f3eb;
+}
+
+.simple-section h2 { margin-top: 5px; }
+
+.events-section { background: #eee5d8; }
+
+.contact-banner {
+  padding: 55px 9%;
+  text-align: center;
+  color: #fff7ed;
+  background:
+    linear-gradient(90deg, #210e0cf0, #371612e8),
+    url('/images/hero-dancer.jpg') center / cover no-repeat,
+    #301410;
+}
+
+.contact-banner h2 { font-size: clamp(30px, 4vw, 44px); }
+.contact-banner > p:not(.section-eyebrow) { color: #e8d6c4; }
+.contact-banner .button-primary { margin-top: 14px; }
+
+
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px 30px;
+  padding: 30px 9%;
+  background: #100b09;
+  color: #cfc0b0;
+  border-top: 1px solid #39251c;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.site-footer p {
+  margin: 0;
+  color: #b9a99a;
+  font-size: 11px;
+}
+
+.site-footer > span {
+  color: #958579;
+  font-size: 10px;
+}
+
+
+.footer-brand {
+  color: #e0b76d;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 17px;
+}
+
+
+/* Shared styling for inner public pages */
+.content-page {
+  width: 100%;
+  padding: clamp(42px, 6vw, 76px) 9%;
+  background: #f7f3eb;
+  color: #201713;
+}
+
+.content-page > section {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.content-page .eyebrow {
+  margin: 0 0 12px;
+  color: #a36a35;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.content-page h1 {
+  margin: 0 0 22px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(34px, 4.5vw, 54px);
+  font-weight: 500;
+  line-height: 1.15;
+  color: #321713;
+}
+
+.content-page p:not(.eyebrow) {
+  max-width: 760px;
+  color: #6f6259;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.content-page h2,
+.content-page h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 500;
+  color: #321713;
+}
+
+@media (max-width: 700px) {
+  .content-page {
+    padding: 38px 6%;
+  }
+
+  .content-page h1 {
+    font-size: clamp(30px, 8vw, 42px);
+  }
+
+  .content-page p:not(.eyebrow) {
+    font-size: 13px;
+  }
+}
+  
+
+@media (max-width: 1050px) {
+  .site-header { padding-inline: 5%; }
+  .main-nav { gap: 12px; }
+  .about-strip {
+    grid-template-columns: repeat(4, 1fr);
+    padding-inline: 6%;
+  }
+  .about-copy { grid-column: 1 / -1; max-width: 600px; }
+  .stat:first-of-type { border-left: 0; }
+  .dance-section { padding-inline: 6%; }
+  .dance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    position: absolute;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 15px 5%;
+  }
+
+  .brand-name { font-size: 16px; }
+  .brand-mark { font-size: 28px; }
+  .header-cta { margin-left: auto; }
+
+  .main-nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    padding: 9px 0 3px;
+  }
+
+  .main-nav a { font-size: 10px; }
+
+  .hero {
+    min-height: 680px;
+    align-items: end;
+    padding: 170px 7% 90px;
+    background-position: 62% center;
+  }
+
+  .hero::before {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(0deg, #100806ef 0%, #100806b0 45%, #10080632 100%);
+  }
+
+  .hero-content,
+  .hero-scroll { position: relative; z-index: 1; }
+
+  .hero h1 { font-size: clamp(42px, 11vw, 58px); }
+  .hero-description { max-width: 330px; }
+
+  .about-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+    padding: 35px 7%;
+  }
+
+  .about-copy { grid-column: 1 / -1; padding-bottom: 10px; }
+  .stat { min-height: 110px; border-left: 0; border-top: 1px solid #e9ddcb; }
+  .stat strong { font-size: 26px; }
+
+  .dance-section { padding: 42px 5%; }
+  .section-heading { align-items: flex-start; flex-direction: column; }
+  .dance-grid { grid-template-columns: 1fr; gap: 13px; }
+  .dance-card { grid-template-columns: 38% 1fr; }
+  .dance-card-art { min-height: 145px; }
+  .dance-card-copy h3 { font-size: 17px; }
+  .dance-card-copy p { font-size: 10px; }
+
+  .site-footer { flex-direction: column; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+}
