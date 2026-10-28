@@ -9,21 +9,31 @@ import WhatWeOfferPage from "../pages/public/WhatWeOfferPage";
 import GalleryPage from "../pages/public/GalleryPage";
 import EventsPage from "../pages/public/EventsPage";
 import ContactPage from "../pages/public/ContactPage";
+import AdminLoginPage from "../pages/admin/AdminLoginPage";
+import AdminDashboardPage from "../pages/admin/AdminDashboardPage";
+import ProtectedAdminRoute from "../pages/admin/ProtectedAdminRoute";
 
 export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<PublicLayout />}>
-  <Route path="/" element={<HomePage />} />
-  <Route path="/about" element={<AboutPage />} />
-  <Route path="/what-we-offer" element={<WhatWeOfferPage />} />
-  <Route path="/gallery" element={<GalleryPage />} />
-  <Route path="/events" element={<EventsPage />} />
-  <Route path="/contact" element={<ContactPage />} />
-</Route>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/what-we-offer" element={<WhatWeOfferPage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/events" element={<EventsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
 
-<Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+        <Route path="/admin/login" element={<AdminLoginPage />} />
+
+        <Route element={<ProtectedAdminRoute />}>
+          <Route path="/admin/dashboard" element={<AdminDashboardPage />}/>
+        </Route>
+
+        <Route path="*" element={<Navigate to="/" replace />} />
+
       </Routes>
     </BrowserRouter>
   );
