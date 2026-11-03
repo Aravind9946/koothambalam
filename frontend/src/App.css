@@ -1998,3 +1998,288 @@ a { color: inherit; text-decoration: none; }
     padding: 21px;
   }
 }
+
+
+/* =========================================
+   KOOTHAMBALAM — ADMIN GALLERY
+========================================= */
+
+.admin-gallery-page {
+  width: 100%;
+  color: #203b31;
+}
+
+.admin-gallery-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.admin-gallery-header h1 {
+  margin: 5px 0 8px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 500;
+}
+
+.admin-gallery-header p:not(.admin-eyebrow) {
+  color: #77786f;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.admin-primary-button {
+  border: 1px solid #203b31;
+  border-radius: 4px;
+  padding: 13px 21px;
+  background: #203b31;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.admin-primary-button:hover {
+  background: #315747;
+  transform: translateY(-1px);
+}
+
+.admin-gallery-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.admin-gallery-stat {
+  padding: 22px;
+  background: #fff;
+  border: 1px solid #eae7df;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-gallery-stat span {
+  color: #77786f;
+  font-size: 13px;
+}
+
+.admin-gallery-stat strong {
+  color: #203b31;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.admin-gallery-content {
+  background: #fff;
+  border: 1px solid #eae7df;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.admin-gallery-tabs {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 0 24px;
+  border-bottom: 1px solid #eae7df;
+  overflow-x: auto;
+}
+
+.admin-gallery-tabs button {
+  position: relative;
+  flex-shrink: 0;
+  padding: 19px 0;
+  border: none;
+  background: transparent;
+  color: #77786f;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.admin-gallery-tabs button.active {
+  color: #203b31;
+  font-weight: 700;
+}
+
+.admin-gallery-tabs button.active::after {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #a58a50;
+  content: "";
+}
+
+.admin-gallery-empty {
+  min-height: 350px;
+  padding: 55px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.admin-gallery-empty-icon {
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+  border: 1px solid #d9d0bb;
+  border-radius: 50%;
+  color: #a58a50;
+  font-size: 32px;
+}
+
+.admin-gallery-empty h2 {
+  margin-bottom: 10px;
+  color: #203b31;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.admin-gallery-empty p {
+  max-width: 430px;
+  margin-bottom: 24px;
+  color: #77786f;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+@media (max-width: 900px) {
+  .admin-gallery-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-gallery-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-gallery-header .admin-primary-button {
+    width: 100%;
+  }
+
+  .admin-gallery-stats {
+    gap: 10px;
+  }
+
+  .admin-gallery-stat {
+    padding: 16px;
+  }
+
+  .admin-gallery-tabs {
+    gap: 20px;
+    padding: 0 16px;
+  }
+
+  .admin-gallery-empty {
+    min-height: 300px;
+    padding: 40px 18px;
+  }
+}
+
+
+.admin-gallery-page {
+  width: 100%;
+  min-height: 100%;
+  padding: 30px 36px 40px;
+  box-sizing: border-box;
+}
+
+.admin-gallery-content {
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+
+.admin-gallery-tabs {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.admin-gallery-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .admin-gallery-page {
+    padding: 22px 16px 30px;
+  }
+}
+
+/* Admin Gallery Media Grid */
+
+.admin-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+.admin-gallery-card {
+  background: #ffffff;
+  border: 1px solid #e8e3d9;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.admin-gallery-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(32, 59, 49, 0.10);
+}
+
+.admin-gallery-card-media {
+  display: block;
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  background: #eeeae1;
+}
+
+.admin-gallery-card-info {
+  padding: 16px;
+}
+
+.admin-gallery-card-info h3 {
+  margin: 0 0 8px;
+  color: #203b31;
+  font-size: 16px;
+}
+
+.admin-gallery-card-info p {
+  margin: 0 0 12px;
+  color: #77736a;
+  font-size: 13px;
+}
+
+.admin-gallery-card-info span {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #f1eee5;
+  color: #203b31;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .admin-gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

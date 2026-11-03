@@ -9,6 +9,52 @@ const app = express();
 const PORT = 5000;
 require("dotenv").config();
 const pool = require("./src/db/pool");
+const multer = require("multer");
+const cloudinary = require("./src/cloudinary");
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 100 * 1024 * 1024, // 100 MB maximum
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+      "image/gif",
+      "video/mp4",
+      "video/webm",
+      "video/quicktime",
+    ];
+
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error("Unsupported file type."));
+    }
+  },
+});
+
+const uploadToCloudinary = (fileBuffer, resourceType) => {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        folder: "Koothambalam/gallery",
+        resource_type: resourceType,
+      },
+      (error, result) => {
+        if (error) {
+          return reject(error);
+        }
+
+        resolve(result);
+      }
+    );
+
+    stream.end(fileBuffer);
+  });
+};
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -64,7 +110,7 @@ function requireAdmin(req, res, next) {
 
 
 
- 
+
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -72,7 +118,7 @@ app.use(
   })
 );
 
- 
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -298,6 +344,136 @@ app.get("/api/gallery", async (req, res) => {
     });
   }
 });
+
+
+app.get("/api/admin/gallery", requireAdmin, async (req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT
+        id,
+        title,
+        description,
+        category,
+        media_type,
+        media_url,
+        cloudinary_public_id,
+        is_published,
+        created_at,
+        updated_at
+       FROM gallery_media
+       ORDER BY created_at DESC`
+    );
+
+    return res.json({
+      status: "success",
+      count: result.rows.length,
+      data: result.rows,
+    });
+  } catch (error) {
+    console.error("Admin gallery fetch error:", error);
+
+    return res.status(500).json({
+      status: "error",
+      message: "Unable to retrieve gallery media.",
+    });
+  }
+});
+
+app.post("/api/admin/gallery", requireAdmin, upload.single("media"), async (req, res) => {
+  let uploadedFile = null;
+
+  try {
+    const { title, description, category, is_published } = req.body;
+
+    // Validate required fields
+    if (!title || !title.trim()) {
+      return res.status(400).json({
+        status: "error",
+        message: "Media title is required.",
+      });
+    }
+
+    if (!category || !category.trim()) {
+      return res.status(400).json({
+        status: "error",
+        message: "Media category is required.",
+      });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({
+        status: "error",
+        message: "Please select an image or video to upload.",
+      });
+    }
+
+    const mediaType = req.file.mimetype.startsWith("video/")
+      ? "video"
+      : "image";
+
+    // Upload file to Cloudinary
+    uploadedFile = await uploadToCloudinary(
+      req.file.buffer,
+      mediaType
+    );
+
+    // Save media details in Neon PostgreSQL
+    const result = await pool.query(
+      `INSERT INTO gallery_media (
+          title,
+          description,
+          category,
+          media_type,
+          media_url,
+          cloudinary_public_id,
+          is_published
+        )
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        RETURNING *`,
+      [
+        title.trim(),
+        description?.trim() || null,
+        category.trim(),
+        mediaType,
+        uploadedFile.secure_url,
+        uploadedFile.public_id,
+        is_published === "true",
+      ]
+    );
+
+    return res.status(201).json({
+      status: "success",
+      message: "Media uploaded successfully.",
+      data: result.rows[0],
+    });
+  } catch (error) {
+    console.error("Gallery media upload error:", error);
+
+    // Remove Cloudinary file if database insertion fails
+    if (uploadedFile?.public_id) {
+      try {
+        await cloudinary.uploader.destroy(
+          uploadedFile.public_id,
+          {
+            resource_type:
+              uploadedFile.resource_type || "image",
+          }
+        );
+      } catch (cleanupError) {
+        console.error(
+          "Cloudinary cleanup error:",
+          cleanupError
+        );
+      }
+    }
+
+    return res.status(500).json({
+      status: "error",
+      message: "Unable to upload gallery media.",
+    });
+  }
+}
+);
 
 
 

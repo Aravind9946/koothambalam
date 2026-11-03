@@ -12,6 +12,8 @@ import ContactPage from "../pages/public/ContactPage";
 import AdminLoginPage from "../pages/admin/AdminLoginPage";
 import AdminDashboardPage from "../pages/admin/AdminDashboardPage";
 import ProtectedAdminRoute from "../pages/admin/ProtectedAdminRoute";
+import GalleryManagementPage from "../pages/admin/GalleryManagementPage";
+import AdminLayout from "../layouts/AdminLayout";
 
 export default function AppRoutes() {
   return (
@@ -29,7 +31,10 @@ export default function AppRoutes() {
         <Route path="/admin/login" element={<AdminLoginPage />} />
 
         <Route element={<ProtectedAdminRoute />}>
-          <Route path="/admin/dashboard" element={<AdminDashboardPage />}/>
+          <Route element={<AdminLayout />}>
+            <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+            <Route path="/admin/gallery" element={<GalleryManagementPage />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
